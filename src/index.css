@@ -2,103 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 240 10% 15%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 15%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 15%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 262 83% 58%;
+    --primary: 222 47% 11%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 70% 50%;
+    --secondary: 43 70% 50%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 4% 46%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 326 78% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 43 70% 50%;
+    --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 262 83% 58%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222 47% 11%;
 
     --radius: 0.75rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(262 83% 58%), hsl(220 70% 50%));
-    --gradient-accent: linear-gradient(135deg, hsl(326 78% 60%), hsl(262 83% 58%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 70% 50%) 0%, hsl(262 83% 58%) 50%, hsl(326 78% 60%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(222 47% 11%), hsl(222 47% 25%));
+    --gradient-accent: linear-gradient(135deg, hsl(43 70% 50%), hsl(43 80% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(222 47% 20%) 100%);
     
-    --shadow-glow: 0 0 40px hsl(262 83% 58% / 0.3);
-    --shadow-card: 0 4px 20px hsl(240 10% 15% / 0.08);
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 262 83% 58%;
-  }
-
-  .dark {
-    --background: 240 10% 8%;
-    --foreground: 0 0% 98%;
-
-    --card: 240 8% 12%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 8% 12%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 262 83% 58%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 220 70% 50%;
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 240 8% 18%;
-    --muted-foreground: 240 5% 64%;
-
-    --accent: 326 78% 60%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 240 8% 18%;
-    --input: 240 8% 18%;
-    --ring: 262 83% 58%;
-
-    --gradient-primary: linear-gradient(135deg, hsl(262 83% 58%), hsl(220 70% 50%));
-    --gradient-accent: linear-gradient(135deg, hsl(326 78% 60%), hsl(262 83% 58%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 70% 50%) 0%, hsl(262 83% 58%) 50%, hsl(326 78% 60%) 100%);
-    
-    --shadow-glow: 0 0 40px hsl(262 83% 58% / 0.4);
-    --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.3);
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 262 83% 58%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 262 83% 58%;
+    --shadow-glow: 0 0 40px hsl(222 47% 11% / 0.15);
+    --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -106,7 +47,6 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "cv11", "ss01";
@@ -120,12 +60,8 @@ All colors MUST be HSL.
   }
 
   @keyframes gradient {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
   .animate-fade-in {
@@ -133,28 +69,49 @@ All colors MUST be HSL.
   }
 
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .a4-container {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 15mm;
+    margin: 10mm auto;
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    aspect-ratio: 1 / 1.414;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    color: #1a1a1a;
+  }
+
+  @media (max-width: 250mm) {
+    .a4-container {
+      width: 100%;
+      height: auto;
+      min-height: unset;
+      padding: 1.5rem;
+      margin: 0;
+      aspect-ratio: auto;
+      box-shadow: none;
     }
   }
 
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 120px;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.03);
+    pointer-events: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    z-index: 0;
   }
 }

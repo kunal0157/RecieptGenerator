@@ -1,5 +1,6 @@
-import { Card } from "@/components/ui/card";
 import { BookingData } from "./BookingForm";
+import { FaPhone, FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
+import { QRCodeCanvas } from "qrcode.react";
 
 interface ReceiptPreviewProps {
   data: BookingData;
@@ -12,178 +13,179 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
 
   const currentDate = new Date().toLocaleDateString("en-IN", {
     day: "numeric",
-    month: "short",
+    month: "long",
     year: "numeric",
   });
 
-  const receiptNumber = "";
+  const receiptNumber = `KMS-${Math.floor(Math.random() * 9000) + 1000}`;
 
   return (
-    <div id="receipt-preview" className="bg-white p-8 pb-16">
-      {/* Double Border Container */}
-      <div className="border-[3px] border-[#1e3a5f] p-1 max-w-4xl mx-auto">
-        <div className="border-2 border-[#1e3a5f] bg-[#f5f3e8] p-8 pb-12">
-          
-          {/* Header Section */}
-          <div className="text-center mb-6 pb-6 border-b-[3px] border-[#1e3a5f]">
-            <div className="flex justify-center mb-4">
-              <img 
-                src="/kmse.png" 
-                alt="KMSE Logo" 
-                className="h-16 w-auto"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                }}
-              />
-            </div>
-            <h1 className="text-2xl font-bold text-[#1e3a5f] mb-1">
-              KUKU MAHI SOUND EFFECT
+    <div id="receipt-preview" className="bg-slate-50 p-4 md:p-8 flex justify-center overflow-auto">
+      <div className="a4-container font-sans text-slate-900 relative">
+        <div className="watermark">OFFICIAL</div>
+        
+        {/* Header Section */}
+        <div className="flex justify-between items-start border-b-2 border-primary/20 pb-8 mb-8 relative z-10">
+          <div className="space-y-2">
+            <h1 className="text-3xl font-black tracking-tighter text-primary">
+              KUKU MAHI <span className="text-secondary">SOUND EFFECT</span>
             </h1>
-            <h2 className="text-3xl font-bold text-[#1e3a5f]">
-              DJ BOOKING RECEIPT
+            <p className="text-sm font-bold tracking-widest text-slate-500 uppercase">
+              Professional DJ & Sound Services
+            </p>
+            <div className="pt-4 space-y-1 text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-2">
+                <FaMapMarkerAlt className="text-secondary" />
+                <span>Indore, Madhya Pradesh, India</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaPhone className="text-secondary" />
+                <span>+91 91799 43210</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaEnvelope className="text-secondary" />
+                <span>contact@kukumahesound.com</span>
+              </div>
+            </div>
+          </div>
+          <div className="text-right">
+            <h2 className="text-4xl font-black text-slate-200 uppercase tracking-tighter mb-2">
+              Receipt
             </h2>
-          </div>
-
-          {/* Receipt Number and Date */}
-          <div className="grid grid-cols-2 gap-4 mb-6 pb-6 border-b-2 border-[#1e3a5f]">
-            <div className="flex gap-2">
-              <span className="font-bold text-[#1e3a5f]">Receipt No:</span>
-              <span className="font-semibold text-[#1e3a5f]">{receiptNumber}</span>
-            </div>
-            <div className="flex gap-2 justify-end">
-              <span className="font-bold text-[#1e3a5f]">Date:</span>
-              <span className="font-semibold text-[#1e3a5f]">{currentDate}</span>
+            <div className="space-y-1 text-sm bg-slate-50 p-3 rounded-lg border border-slate-100">
+              <p><span className="text-slate-400 font-bold uppercase text-[10px]">No:</span> <span className="font-mono font-bold text-primary">{receiptNumber}</span></p>
+              <p><span className="text-slate-400 font-bold uppercase text-[10px]">Date:</span> <span className="font-bold">{currentDate}</span></p>
             </div>
           </div>
-
-          {/* Customer Information */}
-          <div className="mb-6 pb-6 border-b-2 border-[#1e3a5f]">
-            <div className="grid gap-2">
-              <div className="grid grid-cols-[140px_1fr] gap-2">
-                <span className="font-bold text-[#1e3a5f]">Customer Name</span>
-                <span className="font-medium text-[#1e3a5f]">{data.customerName || "-"}</span>
-              </div>
-              <div className="grid grid-cols-[140px_1fr] gap-2">
-                <span className="font-bold text-[#1e3a5f]">Contact No</span>
-                <span className="font-medium text-[#1e3a5f]">{data.customerPhone || "-"}</span>
-              </div>
-              <div className="grid grid-cols-[140px_1fr] gap-2">
-                <span className="font-bold text-[#1e3a5f]">Address</span>
-                <span className="font-medium text-[#1e3a5f]">{data.location || "-"}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Event Details and Booking Details - Two Columns */}
-          <div className="grid md:grid-cols-2 gap-6 mb-6 pb-6 border-b-2 border-[#1e3a5f]">
-            {/* Event Details Column */}
-            <div>
-              <h3 className="font-bold text-[#1e3a5f] mb-3">Event Details</h3>
-              <div className="space-y-2">
-                <div>
-                  <p className="font-bold text-[#1e3a5f]">Event Type</p>
-                  <p className="font-medium text-[#1e3a5f]">{data.eventName || "-"}</p>
-                </div>
-                {data.eventDate && (
-                  <div>
-                    <p className="font-medium text-[#1e3a5f]">
-                      {new Date(data.eventDate).toLocaleDateString("en-IN", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </p>
-                  </div>
-                )}
-                {data.djType && (
-                  <div>
-                    <p className="font-bold text-[#1e3a5f]">DJ Type</p>
-                    <p className="font-medium text-[#1e3a5f] capitalize">{data.djType.replace('-', ' ')}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Booking Details Column */}
-            <div>
-              <h3 className="font-bold text-[#1e3a5f] mb-3">Booking Details</h3>
-              <div className="space-y-2">
-                {data.hours && (
-                  <div>
-                    <p className="font-bold text-[#1e3a5f]">Duration</p>
-                    <p className="font-medium text-[#1e3a5f]">{data.hours} Hours</p>
-                  </div>
-                )}
-                <div>
-                  <p className="font-bold text-[#1e3a5f]">Total Amount</p>
-                  <p className="font-semibold text-lg text-[#1e3a5f]">
-                    ₹{data.totalAmount ? parseFloat(data.totalAmount).toLocaleString("en-IN") : "0"}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-bold text-[#1e3a5f]">Advance Paid</p>
-                  <p className="font-semibold text-lg text-[#1e3a5f]">
-                    ₹{data.advanceAmount ? parseFloat(data.advanceAmount).toLocaleString("en-IN") : "0"}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-bold text-[#1e3a5f]">Remaining Amount</p>
-                  <p className="font-semibold text-lg text-[#1e3a5f]">
-                    ₹{parseFloat(balance).toLocaleString("en-IN")} (To be paid on event day)
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Payment Mode and Received By */}
-          <div className="mb-6 pb-6 border-b-2 border-[#1e3a5f]">
-            <div className="grid gap-2">
-              <div className="grid grid-cols-[140px_1fr] gap-2">
-                <span className="font-bold text-[#1e3a5f]">Payment Mode</span>
-                <span className="font-medium text-[#1e3a5f] capitalize">
-                  {data.paymentMethod || "Cash"}
-                </span>
-              </div>
-              <div className="grid grid-cols-[140px_1fr] gap-2">
-                <span className="font-bold text-[#1e3a5f]">Received By</span>
-                <span className="font-medium text-[#1e3a5f]">
-                  KUKU MAHI SOUND EFFECT<br/>
-                  <span className="text-sm">(Authorized Representative)</span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Additional Notes */}
-          {data.notes && (
-            <div className="mb-6 pb-6 border-b-2 border-[#1e3a5f]">
-              <h3 className="font-bold text-[#1e3a5f] mb-2">Additional Notes</h3>
-              <p className="text-sm text-[#1e3a5f] whitespace-pre-wrap">{data.notes}</p>
-            </div>
-          )}
-
-          {/* Signature Section */}
-          <div className="pt-4">
-            <h3 className="font-bold text-[#1e3a5f] mb-4">Signature</h3>
-            <div className="grid grid-cols-2 gap-8">
-              <div>
-                <div className="border-b-2 border-dotted border-[#1e3a5f] pb-2 mb-2 min-h-[60px]">
-                  
-                </div>
-                <p className="text-sm text-[#1e3a5f] text-center">Authorized Sign</p>
-              </div>
-              <div>
-                <div className="border-b-2 border-dotted border-[#1e3a5f] pb-2 mb-2 min-h-[60px]">
-                  
-                </div>
-                <p className="text-sm text-[#1e3a5f] text-center">Customer Sign</p>
-              </div>
-            </div>
-          </div>
-
         </div>
+
+        {/* Customer & Event Details Section */}
+        <div className="grid grid-cols-2 gap-12 mb-10 relative z-10">
+          <div>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary mb-3">
+              Customer Details
+            </h3>
+            <div className="space-y-1">
+              <p className="text-lg font-bold text-primary">{data.customerName || "Customer Name"}</p>
+              <p className="text-sm font-medium text-slate-600">{data.customerPhone || "Phone Number"}</p>
+              {data.customerEmail && <p className="text-sm font-medium text-slate-600">{data.customerEmail}</p>}
+              <p className="text-sm font-medium text-slate-500 mt-2 leading-relaxed">
+                {data.location || "Event Location"}
+              </p>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary mb-3">
+              Event Details
+            </h3>
+            <div className="space-y-1">
+              <p className="text-lg font-bold text-primary">{data.eventName || "Event Name"}</p>
+              <p className="text-sm font-bold text-slate-600">
+                {data.eventDate ? new Date(data.eventDate).toLocaleDateString("en-IN", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                }) : "Event Date"}
+              </p>
+              <p className="text-sm font-bold uppercase tracking-wider text-slate-500">
+                Type: {data.djType || "Standard"} DJ
+              </p>
+              <p className="text-sm font-bold text-slate-500">
+                Duration: {data.hours || "0"} Hours
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Payment Summary Table */}
+        <div className="flex-grow relative z-10">
+          <table className="w-full mb-10">
+            <thead>
+              <tr className="border-y-2 border-slate-200">
+                <th className="py-4 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Description</th>
+                <th className="py-4 text-right text-[10px] font-black uppercase tracking-widest text-slate-400">Amount</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              <tr>
+                <td className="py-6">
+                  <p className="font-bold text-primary">DJ Booking Service</p>
+                  <p className="text-xs text-slate-400 mt-1">Professional sound setup and performance for {data.eventName || "event"}</p>
+                </td>
+                <td className="py-6 text-right font-bold text-primary">
+                  ₹{data.totalAmount ? parseInt(data.totalAmount).toLocaleString("en-IN") : "0"}
+                </td>
+              </tr>
+              {data.notes && (
+                <tr>
+                  <td colSpan={2} className="py-4">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Additional Notes</p>
+                    <p className="text-xs text-slate-600 italic leading-relaxed">{data.notes}</p>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+
+          {/* Totals Section */}
+          <div className="flex justify-end relative z-10">
+            <div className="w-64 space-y-3">
+              <div className="flex justify-between text-sm py-1">
+                <span className="text-slate-500 font-bold uppercase text-[10px]">Total Amount</span>
+                <span className="font-bold">₹{parseInt(data.totalAmount || "0").toLocaleString("en-IN")}</span>
+              </div>
+              <div className="flex justify-between text-sm py-1 text-green-600">
+                <span className="font-bold uppercase text-[10px]">Advance Paid</span>
+                <span className="font-bold">- ₹{parseInt(data.advanceAmount || "0").toLocaleString("en-IN")}</span>
+              </div>
+              <div className="flex justify-between text-lg py-3 border-t-2 border-primary bg-primary text-white px-4 rounded-lg shadow-lg">
+                <span className="font-black uppercase text-[10px] self-center">Remaining</span>
+                <span className="font-black text-2xl">₹{parseInt(balance).toLocaleString("en-IN")}</span>
+              </div>
+              <p className="text-[9px] text-right text-slate-400 font-bold italic mt-2">
+                * To be cleared before the event starts.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Section */}
+        <div className="border-t-2 border-slate-100 pt-10 mt-10 relative z-10">
+          <div className="flex justify-between items-end px-4">
+            <div className="flex flex-col items-center">
+              <div className="bg-white p-2 rounded-xl border-2 border-primary/10 mb-4 shadow-sm">
+                <QRCodeCanvas 
+                  value={`upi://pay?pa=8271929970@axl&pn=KUKU%20MAHI%20SOUND%20EFFECT&cu=INR`}
+                  size={80}
+                  level="H"
+                  includeMargin={true}
+                />
+              </div>
+              <p className="text-[10px] font-bold text-primary mb-1 uppercase tracking-tighter">Scan to Pay</p>
+              <p className="text-[8px] text-slate-400 font-bold leading-tight uppercase text-center">
+                UPI ID: 8271929970@axl
+              </p>
+            </div>
+            
+            <div className="text-center w-48">
+              <div className="border-b-2 border-slate-200 mb-3 h-12"></div>
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Customer Signature</p>
+            </div>
+
+            <div className="text-center w-48">
+              <div className="border-b-2 border-primary/20 mb-3 h-12"></div>
+              <p className="text-[10px] font-black uppercase tracking-widest text-primary">Authorized Signatory</p>
+            </div>
+          </div>
+          
+          <div className="mt-12 text-center text-[9px] font-bold text-slate-300 uppercase tracking-[0.3em]">
+            Thank You For Choosing Kuku Mahi Sound Effect
+          </div>
+        </div>
+
+        {/* Decorative corner element */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 -mr-16 -mt-16 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary/10 -ml-16 -mb-16 rounded-full blur-3xl"></div>
       </div>
     </div>
   );
